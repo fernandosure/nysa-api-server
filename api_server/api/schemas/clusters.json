@@ -1,0 +1,19 @@
+{
+  "create": {
+    "type": "object",
+    "properties": {
+      "name":  {
+            "type": "string"
+        },
+      "config":  {}
+    },
+    "required": ["name", "config"]
+  },
+  "update":{
+    "type": "object",
+    "properties": {
+      "config":  {}
+    },
+    "required": ["config"]
+  }
+}
