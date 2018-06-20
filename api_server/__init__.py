@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_jsonschema import JsonSchema
 from encoders import CustomJSONEncoder
 from config import config
@@ -13,7 +14,7 @@ def create_app(config_name):
     app.json_encoder = CustomJSONEncoder
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
-
+    CORS(app)
     jsonschema.init_app(app)
 
     from api_server.api import api as api_blueprint
