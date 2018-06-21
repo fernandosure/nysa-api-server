@@ -18,7 +18,12 @@ def create_app(config_name):
     jsonschema.init_app(app)
 
     from api_server.api import api as api_blueprint
-    app.register_blueprint(api_blueprint)
-    
+    from api_server.control_plane import control_plane as control_plane_blueprint
+    from api_server.main import main as main_blueprint
+
+    app.register_blueprint(api_blueprint, url_prefix='/api')
+    app.register_blueprint(control_plane_blueprint, url_prefix='/cp')
+    app.register_blueprint(main_blueprint, url_prefix='/')
+
     return app
 

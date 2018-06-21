@@ -1,0 +1,30 @@
+.col-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.ace_editor { height: 700px;}
+
+
+.tag-input {
+    text-align:center;
+    width: 100px;
+}
+
+.count-input {
+    text-align:center;
+    width: 50px;
+}
+
+.btn-column {
+    text-align: left;
+    width: 150px;
+}
+
+.floating-alert {
+    position: fixed;
+    top: 50px;
+    right: 0
+}

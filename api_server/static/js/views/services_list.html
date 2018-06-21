@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-6 col-centered">
+    <div class="title pt-3" align="center">
+      <h1>Services</h1>
+    </div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <td>Service</td>
+        <td>Tag</td>
+        <td>Count</td>
+      </tr>
+      </thead>
+      <tr ng-repeat="item in services">
+        <td>{{ item.name }}</td>
+        <td>
+          <span ng-hide="item.editing">{{ item.image_tag }}</span>
+          <input ng-show="item.editing" ng-model="item.image_tag" class="tag-input" autofocus  />
+        </td>
+        <td>
+          <span ng-hide="item.editing">{{ item.desired_count }}</span>
+          <input type="number" min="0" ng-show="item.editing" ng-model="item.desired_count" class="count-input" />
+        <td class="btn-column">
+          <button type="button" ng-show="!item.editing" class="btn btn-primary btn-sm" ng-click="item.editing = true"><i class="fas fa-edit"></i></button>
+          <button type="button" ng-show="item.editing" class="btn btn-success btn-sm" ng-click="updateService(item)"><i class="fas fa-rocket"></i></button>
+          <button type="button" ng-show="item.editing" class="btn btn-danger btn-sm" ng-click="item.editing = false"><i class="fas fa-times-circle"></i></button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="floating-alert">
+    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="3000" close="closeAlert($index)">{{alert.msg}}</div>
+</div>
+

@@ -1,13 +1,15 @@
 import os
+from secret_manager import get_secret
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
 
     JSONSCHEMA_DIR = os.path.join(basedir, 'api_server', 'api', 'schemas')
-    AWS_S3_BUCKET = os.getenv('AWS_S3_BUCKET') or 'mbo-nysa-api-server'
-    AWS_SQS_NOTIFICATION_QUEUE = os.getenv('AWS_SQS_NOTIFICATION_QUEUE') or 'nysa-scheduler-queue'
-    SLACK_NOTIFICATIONS_WEBHOOK_URL = os.getenv('SLACK_NOTIFICATIONS_WEBHOOK_URL')
+    AWS_S3_BUCKET = get_secret('AWS_S3_BUCKET') or 'mbo-nysa-api-server'
+    AWS_SQS_NOTIFICATION_QUEUE = get_secret('AWS_SQS_NOTIFICATION_QUEUE') or 'nysa-scheduler-queue'
+    SLACK_NOTIFICATIONS_WEBHOOK_URL = get_secret('SLACK_NOTIFICATIONS_WEBHOOK_URL')
 
     #disable SSL
     SSl_DISABLE = True

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-10 col-centered">
+    <div class="title pt-3" align="center">
+      <h1>Config</h1>
+    </div>
+      <div ui-ace="{
+                    useWrapMode : true,
+                    showGutter: true,
+                    theme:'twilight',
+                    mode:'yaml',
+                    advanced: {
+                        fontSize: 18
+                    }
+                  }" ng-model="clusterConfig">
+      </div>
+
+  </div>
+</div>
+
+<div class="row pt-3" >
+    <div class="col-md-10 col-centered">
+        <button type="button" class="btn btn-success" ng-click="saveChanges()">Save Changes</button>
+    </div>
+</div>
+
+<div class="floating-alert">
+    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="3000" close="closeAlert($index)">{{alert.msg}}</div>
+</div>
