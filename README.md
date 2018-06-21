@@ -40,7 +40,7 @@ The project is available as a docker image simply run::
 
 Configuration
 -------------
-Nysa-Slackbot its integrated with AWS Secret Manager for managing the secrets used during the application life cycle.
+nysa-api-server its integrated with AWS Secret Manager for managing the secrets used during the application life cycle.
 The only configuration that nysa expects as a environment variable is the PROFILE variable that indicates the desired configuration that will get from AWS Secret Manager
 
 - SLACK_NOTIFICATIONS_WEBHOOK_URL: The slack incoming webhook url that the scheduler uses to post back information to the user
