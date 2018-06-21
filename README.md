@@ -17,14 +17,14 @@ The nysa-api-server has the following components
 
 The API component is responsible of managing the desired state of the cluster(s) and exposes the following endpoints.
 
-GET {{base_url}}/api/v1/clusters: Returns the available clusters that nysa is currently managing
-GET {{base_url}}/api/v1/clusters/{{cluster}}/config: Returns the actual cluster desired state and this is the actual configuration that is being updated either using nysa-slack bot and/or nysa-control-plane
-POST {{base_url}}/api/v1/clusters: Creates a new cluster managed by Nysa. The requirement is only one: an existing provisioned ECS cluster with worker nodes attached to it
-PUT {{base_url}}/api/v1/clusters/{{cluster}}/config: If you need to add a NEW service that isn't currently being managed by nysa this endpoint will let you update the cluster desired state to include this new service and with its specifications
-GET {{base_url}}/api/v1/clusters/{{cluster}}/services: Returns the cluster existing/deployed services and its associated image tag and desired count instances
-GET {{base_url}}/api/v1/clusters/{{cluster}}/services/{{service}}/tags: Returns the 10th most recent image tags for a given service.
-PUT {{base_url}}/api/v1/clusters/{{cluster}}/services/{{service}}: Updates the service image tag and/or service desired count instances.
-DELETE {{base_url}}/api/v1/clusters/{{cluster}}/services/{{service}}: Updates the service image tag and/or service desired count instances.
+- GET {{base_url}}/api/v1/clusters: Returns the available clusters that nysa is currently managing
+- GET {{base_url}}/api/v1/clusters/{{cluster}}/config: Returns the actual cluster desired state and this is the actual configuration that is being updated either using nysa-slack bot and/or nysa-control-plane
+- POST {{base_url}}/api/v1/clusters: Creates a new cluster managed by Nysa. The requirement is only one: an existing provisioned ECS cluster with worker nodes attached to it
+- PUT {{base_url}}/api/v1/clusters/{{cluster}}/config: If you need to add a NEW service that isn't currently being managed by nysa this endpoint will let you update the cluster desired state to include this new service and with its specifications
+- GET {{base_url}}/api/v1/clusters/{{cluster}}/services: Returns the cluster existing/deployed services and its associated image tag and desired count instances
+- GET {{base_url}}/api/v1/clusters/{{cluster}}/services/{{service}}/tags: Returns the 10th most recent image tags for a given service.
+- PUT {{base_url}}/api/v1/clusters/{{cluster}}/services/{{service}}: Updates the service image tag and/or service desired count instances.
+- DELETE {{base_url}}/api/v1/clusters/{{cluster}}/services/{{service}}: Updates the service image tag and/or service desired count instances.
 
 You can get more information about the api and its exposed endpoints along with the required parameters by clicking [here](https://documenter.getpostman.com/view/172769/nysa/RWEgryg4)
 
