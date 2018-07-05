@@ -14,6 +14,13 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
         template: '<ui-view />',
     })
 
+
+    .state('cluster.create', {
+        url: '/create',
+        templateUrl: '/static/js/views/cluster_create.html',
+        controller: 'clusterCreateController'
+    })
+
     .state('cluster.list', {
         url: '',
         templateUrl: '/static/js/views/clusters_list.html',
@@ -51,17 +58,47 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
     this.getServiceTags = function (clusterId, service, data) { return $http.get(baseUrl +'/api/v1/clusters/' + clusterId + '/services/' + service + '/tags')}
     this.updateClusterConfig = function (clusterId, data) { return $http.put(baseUrl +'/api/v1/clusters/' + clusterId + '/config', data)}
     this.updateService = function (clusterId, service, data) { return $http.put(baseUrl +'/api/v1/clusters/' + clusterId + '/services/' + service, data)}
+
+    this.createCluster = function (data) { return $http.post(baseUrl +'/api/v1/clusters', data)}
 }])
 
 .controller('clusterListController', ['$scope', 'apiService', 'clusters', function ($scope, apiService, clusters) {
     $scope.clusters = clusters.data.content;
 }])
 
-.controller('clusterConfigController', ['$scope', 'apiService', 'config', '$stateParams', function ($scope, apiService, config, $stateParams) {
+.controller('clusterCreateController', ['$scope', 'apiService', '$state', function ($scope, apiService, $state) {
+
+
+    $scope.alerts = [];
+
+    $scope.createCluster = function() {
+
+        data = {
+            name: $scope.cluster_name,
+            config:  YAML.parse($scope.clusterConfig)
+        }
+
+        var promise = apiService.createCluster(data);
+        promise.then(function(){
+             $scope.alerts = [{ type: 'success', msg: 'Success!!!'}];
+        }), function(){
+             $scope.alerts = [{ type: 'danger', msg: 'Oh snap! An error has occurred try submitting again.' }];
+        }
+    }
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+        $state.go('cluster.list');
+    }
+
+}])
+
+
+.controller('clusterConfigController', ['$scope', 'apiService', 'config', '$stateParams', '$state', function ($scope, apiService, config, $stateParams, $state) {
     $scope.clusterConfig = YAML.stringify(config.data, 10);
     $scope.alerts = [];
 
-    $scope.saveChanges = function() {
+    $scope.saveChanges = function() $scope{
         var promise = apiService.updateClusterConfig($stateParams.clusterId, YAML.parse($scope.clusterConfig));
         promise.then(function(){
              $scope.alerts = [{ type: 'success', msg: 'Success!!!'}];
@@ -72,6 +109,7 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
 
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
+        $state.go('cluster.list');
     }
 }])
 
@@ -107,9 +145,6 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
 
 
     $scope.openModal = function (service) {
-//  $scope.open = function (size, parentSelector) {
-//    var parentElem = parentSelector ?
-//      angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
         var modalInstance = $uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
@@ -133,7 +168,6 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
                 };
             }],
             size: 'sm',
-    //      appendTo: parentElem,
             resolve: {
                 tags: function ($stateParams, apiService) {
                         return apiService.getServiceTags($stateParams.clusterId, service.name)

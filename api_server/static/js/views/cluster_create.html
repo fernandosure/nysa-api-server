@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-10 col-centered">
+    <div class="title pt-3" align="center">
+        <h1>Create Cluster</h1>
+            <span>Name: <input type="text" ng-model="cluster_name"></span>
+    </div>
+    <div class="pt-3">
+        <div ui-ace="{
+                        useWrapMode : true,
+                        showGutter: true,
+                        theme:'twilight',
+                        mode:'yaml',
+                        advanced: {
+                            fontSize: 18
+                        }
+                      }" ng-model="clusterConfig">
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row pt-3" >
+    <div class="col-md-10 col-centered">
+        <button type="button" class="btn btn-success" ng-click="createCluster()">Create</button>
+    </div>
+</div>
+
+<div class="floating-alert">
+    <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="3000" close="closeAlert($index)">{{alert.msg}}</div>
+</div>

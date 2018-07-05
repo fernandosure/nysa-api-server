@@ -8,7 +8,7 @@ app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 @app.cli.command()
 @click.option("-h", "--host",    default="0.0.0.0")
 @click.option("-p", "--port",    type=click.INT, default=5000)
-@click.option('-w', '--workers', type=click.INT, default=10)
+@click.option('-w', '--workers', type=click.INT, default=2)
 @click.option('-t', '--timeout', type=click.INT, default=90)
 def gunicorn(host, port, workers, timeout):
     """Start the Server with Gunicorn"""

@@ -3,12 +3,15 @@
     <div class="title pt-3" align="center">
       <h1>Clusters</h1>
     </div>
-    <table class="table table-striped">
-      <tr ng-repeat="item in clusters">
-        <td>{{ item }}</td>
-        <td><a ui-sref="cluster.services({ clusterId: item })">Services <i class="fas fa-angle-double-down"></i></a></td>
-        <td><a ui-sref="cluster.config({ clusterId: item })">Config <i class="fas fa-cog"></i></a></td>
-      </tr>
-    </table>
+    <div class="pt-3" style="align:left"><a ui-sref="cluster.create" class="btn btn-primary">Create New Cluster</a></div>
+    <div class="pt-3">
+      <table class="table table-striped">
+        <tr ng-repeat="item in clusters">
+          <td>{{ item }}</td>
+          <td><a ui-sref="cluster.services({ clusterId: item })">Services <i class="fas fa-angle-double-down"></i></a></td>
+          <td><a ui-sref="cluster.config({ clusterId: item })">Config <i class="fas fa-cog"></i></a></td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
