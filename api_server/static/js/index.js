@@ -98,7 +98,7 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
     $scope.clusterConfig = YAML.stringify(config.data, 10);
     $scope.alerts = [];
 
-    $scope.saveChanges = function() $scope{
+    $scope.saveChanges = function() {
         var promise = apiService.updateClusterConfig($stateParams.clusterId, YAML.parse($scope.clusterConfig));
         promise.then(function(){
              $scope.alerts = [{ type: 'success', msg: 'Success!!!'}];
