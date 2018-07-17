@@ -8,7 +8,7 @@ test-js:
   stage: test
   script:
     - npm install
-    - npm install -g karma
+    - npm install -g karma-cli
     - karma start --single-run
   allow_failure: false
 
