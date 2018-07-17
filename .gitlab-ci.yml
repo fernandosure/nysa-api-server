@@ -1,0 +1,37 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test-js:
+  image: node:6
+  stage: test
+  script:
+    - npm install
+    - npm install -g karma
+    - karma start --single-run
+  allow_failure: false
+
+
+build:
+  image: python:2.7
+  stage: build
+  script:
+    - python --version
+    - pip install virtualenv
+    - virtualenv env --no-site-packages
+    - source env/bin/activate
+    - pip install -r requirements.txt
+  allow_failure: false
+
+build-n-deploy:
+  image: docker
+  stage: deploy
+  dependencies:
+      - build
+  services:
+    - docker:dind
+  script:
+    - docker build -t 111633362669.dkr.ecr.us-east-1.amazonaws.com/nysa-api-server:${CI_COMMIT_SHA:0:8} .
+    - docker images
+  allow_failure: false

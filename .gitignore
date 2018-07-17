@@ -9,3 +9,5 @@ env/
 .tox/
 .coverage
 .cache
+
+node_modules/

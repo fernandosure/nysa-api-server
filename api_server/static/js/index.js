@@ -58,11 +58,10 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ui.bootstrap'])
     this.getServiceTags = function (clusterId, service, data) { return $http.get(baseUrl +'/api/v1/clusters/' + clusterId + '/services/' + service + '/tags')}
     this.updateClusterConfig = function (clusterId, data) { return $http.put(baseUrl +'/api/v1/clusters/' + clusterId + '/config', data)}
     this.updateService = function (clusterId, service, data) { return $http.put(baseUrl +'/api/v1/clusters/' + clusterId + '/services/' + service, data)}
-
     this.createCluster = function (data) { return $http.post(baseUrl +'/api/v1/clusters', data)}
 }])
 
-.controller('clusterListController', ['$scope', 'apiService', 'clusters', function ($scope, apiService, clusters) {
+.controller('clusterListController', ['$scope', 'clusters', function ($scope, clusters) {
     $scope.clusters = clusters.data.content;
 }])
 

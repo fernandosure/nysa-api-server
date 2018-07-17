@@ -1,0 +1,18 @@
+{
+  "name": "nysa_api_server",
+  "version": "1.0.0",
+  "description": "Nysa api-server ----------",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fernandosure@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2",
+    "karma-spec-reporter": "0.0.32"
+  }
+}
