@@ -7,6 +7,9 @@ test-js:
   image: node:6
   stage: test
   script:
+    - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list
+    - apt-get update && apt-get install --no-install-recommends -y google-chrome-stable
     - npm install
     - npm install -g karma-cli
     - karma start --single-run
