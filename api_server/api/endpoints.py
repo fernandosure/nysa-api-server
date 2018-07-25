@@ -54,6 +54,22 @@ def get_cluster_config(cluster):
 
 
 #############################
+# DEPLOY CHANGES IN CLUSTER CONFIG
+#############################
+@api.route('/v1/clusters/<string:cluster>/deploy', methods=['POST'])
+def deploy_cluster_config(cluster):
+    log.info('deploy_cluster')
+
+    cluster_contents = s3_get_object_contents(cluster)
+    if cluster_contents is None:
+        return jsonify({'message': 'cluster does not exists'}), 404
+
+    config = json.loads(cluster_contents[u'Body'].read())
+    ClusterDeployNotification(cluster, config).notify()
+    return jsonify({'message': 'deploying...'}), 202
+
+
+#############################
 # UPDATE CLUSTER
 #############################
 @api.route('/v1/clusters/<string:cluster>/config', methods=['PUT'])
@@ -144,8 +160,12 @@ def update_service(cluster, service):
         svc[u'desired_count'] = request.json.get('desired_count')
 
     s3_object(cluster).put(Body=json.dumps(config))
-    ClusterDeployNotification(cluster, config).notify()
-    return jsonify({'message': 'deploying...'}), 202
+
+    if request.json.get('deploy', True):
+        ClusterDeployNotification(cluster, config).notify()
+        return jsonify({'message': 'deploying...'}), 202
+    else:
+        return jsonify({}), 202
 
 
 #############################
