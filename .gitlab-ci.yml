@@ -36,5 +36,5 @@ build-n-deploy:
     - docker:dind
   script:
     - docker build -t 111633362669.dkr.ecr.us-east-1.amazonaws.com/nysa-api-server:${CI_COMMIT_SHA:0:8} .
-    - docker images
+    - docker push 111633362669.dkr.ecr.us-east-1.amazonaws.com/nysa-api-server:${CI_COMMIT_SHA:0:8}
   allow_failure: false
