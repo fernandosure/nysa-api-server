@@ -15,7 +15,7 @@ jsondiff==1.1.2
 jsonmerge==1.5.1
 jsonschema==2.6.0
 MarkupSafe==1.0
--e git://github.com/fernandosure/nysa-aws.git@b5d59153a4bf209d571986843a9ce812c73e596a#egg=nysa_aws
+-e git://github.com/fernandosure/nysa-aws.git@301ccddc68da3e08c91afed957216690a1b07328#egg=nysa_aws
 python-dateutil==2.7.3
 s3transfer==0.1.13
 six==1.11.0
