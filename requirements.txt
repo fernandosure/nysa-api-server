@@ -9,7 +9,7 @@ functools32==3.2.3.post2
 futures==3.2.0
 gunicorn==19.8.1
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 jmespath==0.9.3
 jsondiff==1.1.2
 jsonmerge==1.5.1
